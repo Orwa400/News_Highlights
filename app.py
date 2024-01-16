@@ -20,7 +20,7 @@ def home():
         else:
             sources_by_category[source.category].append(source)
 
-return render_template('index.html', sources_by_category=sources_by_category, categories=categories)
+            return render_template('index.html', sources_by_category=sources_by_category, categories=categories)
 
 @app.route('/news/<source_id>')
 def news_source(source_id):
