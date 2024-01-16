@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy 
 from datetime import datetime
 
-db = SQLAlchemy
+db = SQLAlchemy()
 
 class NewsSource(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -14,7 +14,7 @@ class NewsArticle(db.Model):
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
     image =db.Column(db.String(100))
-    created_at = db.Column(db.DataTime, default=datetime.utcnow)
-    source_id = db.Column(db.Integer, db.ForeignKey('news_source.id'), nullbale=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    source_id = db.Column(db.Integer, db.ForeignKey('news_source.id'), nullable=False)
 
-    
+

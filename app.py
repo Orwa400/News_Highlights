@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request
-import requests
+from flask import Flask, render_template
 from models import db, NewsSource, NewsArticle
 
 app = Flask(__name__)
@@ -7,7 +6,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SECRET_KEY'] = '557df6d49aabf4c9aea5b85cc162a735' 
 db.init_app(app)
 
-@app.rote('/')
+@app.route('/')
 def home():
    sources_by_category = {} # DIctionary to organize sources by category
    categories = set()
