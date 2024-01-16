@@ -1,10 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, flash, redirect, url_for
 from models import db, NewsSource, NewsArticle
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SECRET_KEY'] = '557df6d49aabf4c9aea5b85cc162a735' 
-db.init_app(app)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 @app.route('/')
 def home():
@@ -37,7 +39,7 @@ def add_favorite(source_id):
     if 'favorites' not in session:
         session['favorites'] = []
 
-    if souce_id not in session['favorites']:
+    if source_id not in session['favorites']:
         session['favorites'].append(source_id)
         flash('News source added to favorites!', 'success')
     else:
