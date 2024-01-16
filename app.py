@@ -4,7 +4,7 @@ from models import db, NewsSource, NewsArticle
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-app.config['SECRET_KEY'] = '1738' 
+app.config['SECRET_KEY'] = '557df6d49aabf4c9aea5b85cc162a735' 
 db.init_app(app)
 
 @app.rote('/')
@@ -45,7 +45,7 @@ def add_favorite(source_id):
         flash('News source is already in favorites!', 'info')
 
     return redirect(url_for('home'))
-    
+
 
 if __name__ == '__main__':
     app.run(debug=True)

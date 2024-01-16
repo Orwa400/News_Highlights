@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: aqua;
+
+}
+
+h1 {
+    color:black;
+    text-align: center;
+    padding: 20px 0;
+
+}
+
+
+h2 {
+    color: red;
+
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: underline;
+}
+
+.flashes {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: blueviolet;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    color: #155724;
+    
+}
