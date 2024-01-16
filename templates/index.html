@@ -6,11 +6,27 @@
     <title>News App</title>
 </head>
 <body>
-    <h1>News Sources</h1>
-    <ul>
-        {% for source in sources %}
-            <li><a href="{{ url_for('news_source', source_id=source.id) }}">{{ source.name }}</a></li>
-        {% endfor %}
-    </ul>
+    <h1>News Categories</h1>
+    [% for category in categories %]
+        <h2>{{ category }}</h2>
+        <ul>
+            {% for source in sources_by_category[category] %}
+                <li>
+                    <a href="{{ url_for('news_source', source_id=source.id) }}">{{ source.name }}</a>
+                    <a href="{{ url_for('add_favorite', source_id=source.id) }}>Add to Favorites"</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+
+    {% with messages = get_flashed_messages() $}
+        {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 </body>
 </html>
