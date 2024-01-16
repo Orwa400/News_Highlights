@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News App</title>
+</head>
+<body>
+    <h1>News Sources</h1>
+    <ul>
+        {% for source in sources %}
+            <li><a href="{{ url_for('news_source', source_id=source.id) }}">{{ source.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
