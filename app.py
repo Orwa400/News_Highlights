@@ -1,27 +1,28 @@
 from flask import Flask, render_template, session, flash, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 from models import db, NewsSource, NewsArticle
 from flask_migrate import Migrate
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SECRET_KEY'] = '557df6d49aabf4c9aea5b85cc162a735' 
-db = SQLAlchemy(app)
+db.init_app(app)
 migrate = Migrate(app, db)
 
 @app.route('/')
 def home():
-   sources_by_category = {} # DIctionary to organize sources by category
-   categories = set()
+    sources_by_category = {}  # Dictionary to organize sources by category
+    categories = set()
    
-   sources = NewsSource.query.all()
-   for source in sources:
+    sources = NewsSource.query.all()
+    for source in sources:
         categories.add(source.category)
         if source.category not in sources_by_category:
             sources_by_category[source.category] = [source]
         else:
             sources_by_category[source.category].append(source)
-
-            return render_template('index.html', sources_by_category=sources_by_category, categories=categories)
+    
+    return render_template('index.html', sources_by_category=sources_by_category, categories=categories)
 
 @app.route('/news/<source_id>')
 def news_source(source_id):
@@ -46,7 +47,6 @@ def add_favorite(source_id):
         flash('News source is already in favorites!', 'info')
 
     return redirect(url_for('home'))
-
 
 if __name__ == '__main__':
     app.run(debug=True)
